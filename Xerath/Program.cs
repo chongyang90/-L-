@@ -1,4 +1,4 @@
-#region
+﻿#region
 
 using System;
 using System.Collections.Generic;
@@ -108,7 +108,7 @@ namespace Xerath
             Config = new Menu(ChampionName, ChampionName, true);
 
             //Orbwalker submenu
-            Config.AddSubMenu(new Menu("走砍设置", "Orbwalking"));
+            Config.AddSubMenu(new Menu("Orbwalking", "Orbwalking"));
 
             //Add the target selector to the menu as submenu.
             var targetSelectorMenu = new Menu("目标选择器", "Target Selector");
@@ -119,76 +119,76 @@ namespace Xerath
             Orbwalker = new Orbwalking.Orbwalker(Config.SubMenu("Orbwalking"));
 
             //Combo menu:
-            Config.AddSubMenu(new Menu("连招设置", "Combo"));
+            Config.AddSubMenu(new Menu("Combo", "Combo"));
             Config.SubMenu("Combo").AddItem(new MenuItem("UseQCombo", "使用 Q").SetValue(true));
             Config.SubMenu("Combo").AddItem(new MenuItem("UseWCombo", "使用 W").SetValue(true));
             Config.SubMenu("Combo").AddItem(new MenuItem("UseECombo", "使用 E").SetValue(true));
             Config.SubMenu("Combo")
                 .AddItem(
-                    new MenuItem("ComboActive", "连招!").SetValue(
+                    new MenuItem("ComboActive", "Combo!").SetValue(
                         new KeyBind(Config.Item("Orbwalk").GetValue<KeyBind>().Key, KeyBindType.Press)));
 
             //Misc
-            Config.AddSubMenu(new Menu("R大招", "R"));
-            Config.SubMenu("R").AddItem(new MenuItem("EnableRUsage", "自动使用大招").SetValue(true));
-            Config.SubMenu("R").AddItem(new MenuItem("rMode", "模式").SetValue(new StringList(new[] { "正常", "自定义延迟", "OnTap"})));
-            Config.SubMenu("R").AddItem(new MenuItem("rModeKey", "OnTap 按键").SetValue(new KeyBind("T".ToCharArray()[0], KeyBindType.Press)));
-            Config.SubMenu("R").AddSubMenu(new Menu("自定义延迟", "Custom delays"));
+            Config.AddSubMenu(new Menu("R", "R"));
+            Config.SubMenu("R").AddItem(new MenuItem("EnableRUsage", "Auto use charges").SetValue(true));
+            Config.SubMenu("R").AddItem(new MenuItem("rMode", "Mode").SetValue(new StringList(new[] { "Normal", "Custom delays", "OnTap"})));
+            Config.SubMenu("R").AddItem(new MenuItem("rModeKey", "OnTap key").SetValue(new KeyBind("T".ToCharArray()[0], KeyBindType.Press)));
+            Config.SubMenu("R").AddSubMenu(new Menu("Custom delays", "Custom delays"));
             for (int i = 1; i <= 3; i++)
                 Config.SubMenu("R").SubMenu("Custom delays").AddItem(new MenuItem("Delay"+i, "Delay"+i).SetValue(new Slider(0, 1500, 0)));
-            Config.SubMenu("R").AddItem(new MenuItem("PingRKillable", "Ping 可击杀的目标 (本地)").SetValue(true));
+            Config.SubMenu("R").AddItem(new MenuItem("PingRKillable", "Ping on killable targets (only local)").SetValue(true));
             Config.SubMenu("R").AddItem(new MenuItem("BlockMovement", "Block right click while casting R").SetValue(false));
             
 
             //Harass menu:
-            Config.AddSubMenu(new Menu("骚扰", "Harass"));
-            Config.SubMenu("Harass").AddItem(new MenuItem("UseQHarass", "使用 Q").SetValue(true));
-            Config.SubMenu("Harass").AddItem(new MenuItem("UseWHarass", "使用 W").SetValue(false));
+            Config.AddSubMenu(new Menu("Harass", "Harass"));
+            Config.SubMenu("Harass").AddItem(new MenuItem("UseQHarass", "Use Q").SetValue(true));
+            Config.SubMenu("Harass").AddItem(new MenuItem("UseWHarass", "Use W").SetValue(false));
             Config.SubMenu("Harass")
                 .AddItem(
-                    new MenuItem("HarassActive", "骚扰!").SetValue(
+                    new MenuItem("HarassActive", "Harass!").SetValue(
                         new KeyBind(Config.Item("Farm").GetValue<KeyBind>().Key, KeyBindType.Press)));
             Config.SubMenu("Harass")
                 .AddItem(
-                    new MenuItem("HarassActiveT", "骚扰 (切换)!").SetValue(new KeyBind("Y".ToCharArray()[0],
+                    new MenuItem("HarassActiveT", "Harass (toggle)!").SetValue(new KeyBind("Y".ToCharArray()[0],
                         KeyBindType.Toggle)));
 
             //Farming menu:
-            Config.AddSubMenu(new Menu("补兵", "Farm"));
+            Config.AddSubMenu(new Menu("Farm", "Farm"));
             Config.SubMenu("Farm")
                 .AddItem(
-                    new MenuItem("UseQFarm", "使用 Q").SetValue(
-                        new StringList(new[] { "冻结", "清线", "两者", "不使用" }, 2)));
+                    new MenuItem("UseQFarm", "Use Q").SetValue(
+                        new StringList(new[] { "Freeze", "LaneClear", "Both", "No" }, 2)));
             Config.SubMenu("Farm")
                 .AddItem(
-                    new MenuItem("UseWFarm", "使用 W").SetValue(
-                        new StringList(new[] { "冻结", "清线", "两者", "不使用" }, 1)));
+                    new MenuItem("UseWFarm", "Use W").SetValue(
+                        new StringList(new[] { "Freeze", "LaneClear", "Both", "No" }, 1)));
             Config.SubMenu("Farm")
                 .AddItem(
-                    new MenuItem("FreezeActive", "冻结!").SetValue(
+                    new MenuItem("FreezeActive", "Freeze!").SetValue(
                         new KeyBind(Config.Item("Farm").GetValue<KeyBind>().Key, KeyBindType.Press)));
             Config.SubMenu("Farm")
                 .AddItem(
-                    new MenuItem("LaneClearActive", "清线!").SetValue(
+                    new MenuItem("LaneClearActive", "LaneClear!").SetValue(
                         new KeyBind(Config.Item("LaneClear").GetValue<KeyBind>().Key, KeyBindType.Press)));
 
             //JungleFarm menu:
-            Config.AddSubMenu(new Menu("清野", "JungleFarm"));
-            Config.SubMenu("JungleFarm").AddItem(new MenuItem("UseQJFarm", "使用 Q").SetValue(true));
-            Config.SubMenu("JungleFarm").AddItem(new MenuItem("UseWJFarm", "使用 W").SetValue(true));
+            Config.AddSubMenu(new Menu("JungleFarm", "JungleFarm"));
+            Config.SubMenu("JungleFarm").AddItem(new MenuItem("UseQJFarm", "Use Q").SetValue(true));
+            Config.SubMenu("JungleFarm").AddItem(new MenuItem("UseWJFarm", "Use W").SetValue(true));
             Config.SubMenu("JungleFarm")
                 .AddItem(
-                    new MenuItem("JungleFarmActive", "清野!").SetValue(
+                    new MenuItem("JungleFarmActive", "JungleFarm!").SetValue(
                         new KeyBind(Config.Item("LaneClear").GetValue<KeyBind>().Key, KeyBindType.Press)));
 
             //Misc
             Config.AddSubMenu(new Menu("Misc", "Misc"));
-            Config.SubMenu("Misc").AddItem(new MenuItem("InterruptSpells", "打断技能").SetValue(true));
-            Config.SubMenu("Misc").AddItem(new MenuItem("AutoEGC", "自动E反接近").SetValue(true));
+            Config.SubMenu("Misc").AddItem(new MenuItem("InterruptSpells", "Interrupt spells").SetValue(true));
+            Config.SubMenu("Misc").AddItem(new MenuItem("AutoEGC", "AutoE gapclosers").SetValue(true));
 
 
             //Damage after combo:
-            var dmgAfterComboItem = new MenuItem("DamageAfterR", "显示损伤 3xR").SetValue(true);
+            var dmgAfterComboItem = new MenuItem("DamageAfterR", "Draw damage after 3xR").SetValue(true);
             Utility.HpBarDamageIndicator.DamageToUnit += hero => (float)Player.GetSpellDamage(hero, SpellSlot.R) * 3;
             Utility.HpBarDamageIndicator.Enabled = dmgAfterComboItem.GetValue<bool>();
             dmgAfterComboItem.ValueChanged += delegate(object sender, OnValueChangeEventArgs eventArgs)
@@ -197,22 +197,22 @@ namespace Xerath
             };
 
             //Drawings menu:
-            Config.AddSubMenu(new Menu("范围设置", "Drawings"));
+            Config.AddSubMenu(new Menu("Drawings", "Drawings"));
             Config.SubMenu("Drawings")
                 .AddItem(
-                    new MenuItem("QRange", "Q 范围").SetValue(new Circle(true, Color.FromArgb(150, Color.DodgerBlue))));
+                    new MenuItem("QRange", "Q range").SetValue(new Circle(true, Color.FromArgb(150, Color.DodgerBlue))));
             Config.SubMenu("Drawings")
                 .AddItem(
-                    new MenuItem("WRange", "W 范围").SetValue(new Circle(true, Color.FromArgb(150, Color.DodgerBlue))));
+                    new MenuItem("WRange", "W range").SetValue(new Circle(true, Color.FromArgb(150, Color.DodgerBlue))));
             Config.SubMenu("Drawings")
                 .AddItem(
-                    new MenuItem("ERange", "E 范围").SetValue(new Circle(false, Color.FromArgb(150, Color.DodgerBlue))));
+                    new MenuItem("ERange", "E range").SetValue(new Circle(false, Color.FromArgb(150, Color.DodgerBlue))));
             Config.SubMenu("Drawings")
                 .AddItem(
-                    new MenuItem("RRange", "R 范围").SetValue(new Circle(false, Color.FromArgb(150, Color.DodgerBlue))));
+                    new MenuItem("RRange", "R range").SetValue(new Circle(false, Color.FromArgb(150, Color.DodgerBlue))));
             Config.SubMenu("Drawings")
                 .AddItem(
-                    new MenuItem("RRangeM", "R 范围 (小地图)").SetValue(new Circle(false,
+                    new MenuItem("RRangeM", "R range (minimap)").SetValue(new Circle(false,
                         Color.FromArgb(150, Color.DodgerBlue))));
             Config.SubMenu("Drawings")
                 .AddItem(dmgAfterComboItem);
